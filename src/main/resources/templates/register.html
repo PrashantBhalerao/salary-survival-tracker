@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <title>Register</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+</head>
+
+<body class="auth-body">
+
+<div class="auth-container">
+
+    <!-- LEFT SIDE -->
+
+    <div class="auth-left">
+
+        <h1>
+            Join Smart Finance 🚀
+        </h1>
+
+        <p>
+            Build better money habits.
+            Track expenses.
+            Achieve your savings goals.
+        </p>
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+
+    <div class="auth-right">
+
+        <div class="auth-card">
+
+            <h2>
+                Create Account ✨
+            </h2>
+
+            <p class="auth-subtitle">
+                Start your finance journey
+            </p>
+
+            <form th:action="@{/saveUser}"
+                  th:object="${user}"
+                  method="post">
+
+                <div class="input-group">
+
+                    <label>Full Name</label>
+
+                    <input type="text"
+                           th:field="*{fullName}"
+                           placeholder="Enter full name"
+                           required>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Email</label>
+
+                    <input type="email"
+                           th:field="*{email}"
+                           placeholder="Enter email"
+                           required>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Password</label>
+
+                    <input type="password"
+                           th:field="*{password}"
+                           placeholder="Enter password"
+                           required>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Monthly Salary</label>
+
+                    <input type="number"
+                           th:field="*{salary}"
+                           placeholder="Enter salary"
+                           required>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Salary Credit Date</label>
+
+                    <input type="number"
+                           th:field="*{salaryDate}"
+                           placeholder="Example: 1"
+                           required>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Savings Goal 🎯</label>
+
+                    <input type="number"
+                           th:field="*{savingsGoal}"
+                           placeholder="Enter savings goal"
+                           required>
+
+                </div>
+
+                <button type="submit"
+                        class="auth-btn">
+
+                    Create Account 🚀
+
+                </button>
+
+            </form>
+
+            <div class="auth-footer">
+
+                <p>
+                    Already have an account?
+                </p>
+
+                <a href="/login">
+                    Login Here
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

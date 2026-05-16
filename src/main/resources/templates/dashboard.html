@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <div class="top-bar">
+
+    <h1 class="title">
+        Salary Survival Dashboard 💸
+    </h1>
+
+    <button id="themeToggle"
+            class="theme-btn">
+
+        🌙 Theme
+
+    </button>
+
+</div>
+    <!-- <h1 class="title">
+        Salary Survival Dashboard 💸
+    </h1>
+
+    <div class="theme-toggle-container">
+
+    <button id="themeToggle"
+            class="theme-btn">
+
+        🌙 Toggle Theme
+
+    </button>
+
+</div> -->
+
+    <!-- USER CARD -->
+
+    <div class="card">
+
+        <h2>
+            Welcome,
+            <span class="highlight"
+                  th:text="${user.fullName}">
+            </span>
+            👋
+        </h2>
+
+        <div class="info">
+            📧 Email:
+            <span th:text="${user.email}"></span>
+        </div>
+
+        <div class="info">
+            💰 Monthly Salary:
+            ₹<span th:text="${user.salary}"></span>
+        </div>
+
+        <div class="info">
+            📅 Salary Date:
+            <span th:text="${user.salaryDate}"></span>
+        </div>
+
+    </div>
+
+    <!-- MAIN ANALYTICS -->
+
+    <div class="stats-grid">
+
+        <div class="stats-card">
+            <h3>Total Expenses</h3>
+            <p>₹<span class="counter"
+                      th:attr="data-target=${totalExpenses}">0</span></p>
+        </div>
+
+        <div class="stats-card">
+            <h3>Remaining Balance</h3>
+            <p>₹<span class="counter"
+                      th:attr="data-target=${remainingBalance}">0</span></p>
+        </div>
+
+        <div class="stats-card">
+            <h3>Days Left</h3>
+            <p><span class="counter"
+                     th:attr="data-target=${daysLeft}">0</span></p>
+        </div>
+
+        <div class="stats-card">
+            <h3>Safe Daily Spend</h3>
+            <p>₹<span class="counter"
+                      th:attr="data-target=${safeDailySpend}">0</span></p>
+        </div>
+
+        <div class="stats-card">
+            <h3>Total Entries</h3>
+            <p><span class="counter"
+                     th:attr="data-target=${totalExpenseCount}">0</span></p>
+        </div>
+
+        <div class="stats-card">
+            <h3>Highest Expense</h3>
+            <p>₹<span class="counter"
+                      th:attr="data-target=${highestExpense}">0</span></p>
+        </div>
+
+        <div class="stats-card">
+            <h3>Lowest Expense</h3>
+            <p>₹<span class="counter"
+                      th:attr="data-target=${lowestExpense}">0</span></p>
+        </div>
+
+        <div class="stats-card">
+            <h3>Average Expense</h3>
+            <p>₹<span class="counter"
+                      th:attr="data-target=${averageExpense}">0</span></p>
+        </div>
+
+    </div>
+
+    <!-- MONTHLY SUMMARY -->
+
+<div class="card">
+
+    <h2 style="margin-bottom:25px;">
+        Monthly Summary 📅
+    </h2>
+
+    <div class="stats-grid">
+
+        <div class="stats-card">
+
+            <h3>This Month Spend</h3>
+
+            <p>
+                ₹<span th:text="${monthlyExpenses}">
+                </span>
+            </p>
+
+        </div>
+
+        <div class="stats-card">
+
+            <h3>Monthly Entries</h3>
+
+            <p th:text="${monthlyExpenseCount}">
+            </p>
+
+        </div>
+
+        <div class="stats-card">
+
+            <h3>Salary Usage</h3>
+
+            <p>
+                <span th:text="${monthlyUsagePercentage}">
+                </span>%
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <!-- CATEGORY ANALYTICS -->
+
+    <div class="card">
+
+        <h2 style="margin-bottom:25px;">
+            Expense Categories 📊
+        </h2>
+
+        <div class="category-grid">
+
+            <div class="category-card">
+                <h3>🍔 Food</h3>
+                <p>₹<span th:text="${foodExpense}"></span></p>
+            </div>
+
+            <div class="category-card">
+                <h3>🚕 Travel</h3>
+                <p>₹<span th:text="${travelExpense}"></span></p>
+            </div>
+
+            <div class="category-card">
+                <h3>🛍 Shopping</h3>
+                <p>₹<span th:text="${shoppingExpense}"></span></p>
+            </div>
+
+            <div class="category-card">
+                <h3>📄 Bills</h3>
+                <p>₹<span th:text="${billsExpense}"></span></p>
+            </div>
+
+            <div class="category-card">
+                <h3>🎮 Entertainment</h3>
+                <p>₹<span th:text="${entertainmentExpense}"></span></p>
+            </div>
+
+            <div class="category-card">
+                <h3>✨ Other</h3>
+                <p>₹<span th:text="${otherExpense}"></span></p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FINANCIAL HEALTH -->
+
+    <div class="card">
+
+        <h2 style="margin-bottom:25px;">
+            Financial Health 📉
+        </h2>
+
+        <div class="progress-section">
+
+            <div class="progress-label">
+
+                <span>💸 Salary Used</span>
+
+                <span th:text="${usedPercentage} + '%'"></span>
+
+            </div>
+
+            <div class="progress-bar">
+
+                <div class="progress-fill danger-fill"
+                     th:style="'width:' + ${usedPercentage} + '%'">
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="progress-section">
+
+            <div class="progress-label">
+
+                <span>💰 Money Left</span>
+
+                <span th:text="${remainingPercentage} + '%'"></span>
+
+            </div>
+
+            <div class="progress-bar">
+
+                <div class="progress-fill safe-fill"
+                     th:style="'width:' + ${remainingPercentage} + '%'">
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="budget-status">
+
+            <p th:text="${budgetStatus}"></p>
+
+        </div>
+
+    </div>
+
+    <!-- SAVINGS GOAL -->
+
+    <div class="card">
+
+        <h2 style="margin-bottom:25px;">
+            Savings Goal 🎯
+        </h2>
+
+        <div class="info">
+
+            💰 Goal Amount:
+            ₹<span th:text="${savingsGoal}"></span>
+
+        </div>
+
+        <div class="progress-section">
+
+            <div class="progress-label">
+
+                <span>Goal Progress</span>
+
+                <span th:text="${savingsProgress} + '%'"></span>
+
+            </div>
+
+            <div class="progress-bar">
+
+                <div class="progress-fill safe-fill"
+                     th:style="'width:' + ${savingsProgress} + '%'">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- CHART SECTION -->
+
+    <div class="card">
+
+        <h2 style="margin-bottom:25px;">
+            Spending Analytics 📈
+        </h2>
+
+        <div class="chart-container">
+
+            <canvas id="expenseChart"></canvas>
+
+        </div>
+
+    </div>
+
+    <!-- SMART ALERT -->
+
+<div class="smart-alert-card"
+     th:classappend="${alertClass}">
+
+    <h2>
+        AI Spending Alert 🤖
+    </h2>
+
+    <p th:text="${smartAlert}"></p>
+
+</div>
+
+    <!-- ALERT BOX -->
+
+    <div class="alert-box">
+
+        <p th:text="${alertMessage}"></p>
+
+    </div>
+
+<!-- AI FINANCE TIPS -->
+
+<div class="ai-tip-card">
+
+    <h2>
+        AI Finance Tips 🧠
+    </h2>
+
+    <p th:text="${aiTip}"></p>
+
+</div>
+
+
+    <!-- BUTTONS -->
+
+    <div class="card">
+
+        <div class="button-group">
+
+            <a href="/addExpense" class="btn btn-add">
+                ➕ Add Expense
+            </a>
+
+            <a href="/expenses" class="btn btn-view">
+                📊 View Expenses
+            </a>
+
+            <a href="/logout" class="btn btn-logout">
+                🚪 Logout
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script th:inline="javascript">
+
+    const foodExpense = [[${foodExpense}]];
+    const travelExpense = [[${travelExpense}]];
+    const shoppingExpense = [[${shoppingExpense}]];
+    const billsExpense = [[${billsExpense}]];
+    const entertainmentExpense = [[${entertainmentExpense}]];
+    const otherExpense = [[${otherExpense}]];
+
+    const ctx =
+        document.getElementById('expenseChart');
+const expenseChart =
+    new Chart(ctx, {
+
+        type: 'doughnut',
+
+        data: {
+
+            labels: [
+                'Food',
+                'Travel',
+                'Shopping',
+                'Bills',
+                'Entertainment',
+                'Other'
+            ],
+
+            datasets: [{
+
+                data: [
+                    foodExpense,
+                    travelExpense,
+                    shoppingExpense,
+                    billsExpense,
+                    entertainmentExpense,
+                    otherExpense
+                ],
+
+                backgroundColor: [
+                    '#38bdf8',
+                    '#818cf8',
+                    '#c084fc',
+                    '#f472b6',
+                    '#fb7185',
+                    '#f59e0b'
+                ],
+
+                borderWidth: 0
+            }]
+        },
+
+        options: {
+
+            responsive: true,
+
+            plugins: {
+
+                legend: {
+
+                    labels: {
+
+                        color: 'white',
+
+                        font: {
+                            size: 14
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+</script>
+
+<script>
+
+    const counters =
+        document.querySelectorAll('.counter');
+
+    counters.forEach(counter => {
+
+        const updateCounter = () => {
+
+            const target =
+                +counter.getAttribute('data-target');
+
+            const current =
+                +counter.innerText;
+
+            const increment =
+                target / 50;
+
+            if(current < target) {
+
+                counter.innerText =
+                    `${Math.ceil(current + increment)}`;
+
+                setTimeout(updateCounter, 30);
+            }
+            else {
+
+                counter.innerText = target;
+            }
+        };
+
+        updateCounter();
+    });
+
+</script>
+
+<script>
+
+    const themeToggle =
+        document.getElementById('themeToggle');
+
+    themeToggle.addEventListener(
+        'click',
+        () => {
+
+            document.body.classList.toggle(
+                'light-mode'
+            );
+
+            // UPDATE CHART TEXT COLORS
+
+            if(document.body.classList.contains(
+                'light-mode'
+            )) {
+
+                expenseChart.options.plugins.legend.labels.color =
+                    '#111827';
+            }
+            else {
+
+                expenseChart.options.plugins.legend.labels.color =
+                    'white';
+            }
+
+            expenseChart.update();
+        }
+    );
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Expenses</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+
+  <body>
+    <div class="dashboard-container">
+      <h1 class="title">Expense History 📊</h1>
+
+      <!-- SEARCH + FILTER -->
+
+      <div class="card">
+        <form action="/expenses" method="get" class="search-form">
+          <input type="text" name="keyword" placeholder="Search expense..." />
+
+          <button type="submit" class="btn btn-add">🔍 Search</button>
+        </form>
+
+        <div class="filter-buttons">
+          <a href="/expenses?category=Food" class="btn btn-view"> 🍔 Food </a>
+
+          <a href="/expenses?category=Travel" class="btn btn-view">
+            🚕 Travel
+          </a>
+
+          <a href="/expenses?category=Shopping" class="btn btn-view">
+            🛍 Shopping
+          </a>
+
+          <a href="/expenses?category=Bills" class="btn btn-view"> 📄 Bills </a>
+
+          <a href="/expenses?category=Entertainment" class="btn btn-view">
+            🎮 Entertainment
+          </a>
+
+          <a href="/expenses" class="btn btn-logout"> ❌ Clear </a>
+        </div>
+      </div>
+
+      <!-- EXPENSE TABLE -->
+
+      <div class="card">
+        <table class="expense-table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Amount</th>
+              <th>Category</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr th:each="expense : ${expenses}">
+              <td th:text="${expense.title}"></td>
+
+              <td>₹<span th:text="${expense.amount}"></span></td>
+
+              <td th:text="${expense.category}"></td>
+
+              <td th:text="${expense.expenseDate}"></td>
+
+              <td>
+
+    <div class="action-buttons">
+
+        <a th:href="@{'/editExpense/' + ${expense.id}}"
+           class="btn btn-view">
+
+            ✏️ Edit
+
+        </a>
+
+        <a th:href="@{'/deleteExpense/' + ${expense.id}}"
+           class="btn btn-logout"
+
+           onclick=
+           "return confirm(
+           'Delete this expense?'
+           )">
+
+            🗑 Delete
+
+        </a>
+
+    </div>
+
+</td>
+              <!-- <td>
+                <a
+                  th:href="@{'/editExpense/' + ${expense.id}}"
+                  class="btn btn-view"
+                >
+                  ✏️ Edit
+                </a>
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- BUTTONS -->
+
+      <div class="card">
+        <div class="button-group">
+          <a href="/dashboard" class="btn btn-view"> 🏠 Dashboard </a>
+
+          <a href="/addExpense" class="btn btn-add"> ➕ Add Expense </a>
+
+          <a href="/download-pdf" class="btn btn-add"> 📄 Download PDF </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

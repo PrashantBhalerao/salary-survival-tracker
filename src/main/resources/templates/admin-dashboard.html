@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <div class="top-bar">
+
+        <h1 class="title">
+            Admin Dashboard 👑
+        </h1>
+
+        <a href="/logout"
+           class="btn btn-logout">
+
+            Logout
+
+        </a>
+
+    </div>
+
+    <div class="stats-grid">
+
+        <div class="stats-card">
+
+            <h3>Total Users</h3>
+
+            <p th:text="${totalUsers}">
+            </p>
+
+        </div>
+
+        <div class="stats-card">
+
+            <h3>Total Expenses</h3>
+
+            <p th:text="${totalExpenses}">
+            </p>
+
+        </div>
+
+        <div class="stats-card">
+
+            <h3>Platform Expenses</h3>
+
+            <p>
+                ₹<span th:text="${totalPlatformExpenses}">
+                </span>
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <title>Login</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+</head>
+
+<body class="auth-body">
+
+<div class="auth-container">
+
+    <!-- LEFT SIDE -->
+
+    <div class="auth-left">
+
+        <h1>
+            Salary Tracker 💸
+        </h1>
+
+        <p>
+            Track your money.
+            Control your future.
+            Save smarter.
+        </p>
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+
+    <div class="auth-right">
+
+        <div class="auth-card">
+
+            <h2>
+                Welcome Back 👋
+            </h2>
+
+            <p class="auth-subtitle">
+                Login to continue
+            </p>
+
+            <!-- ERROR -->
+
+            <div th:if="${error}"
+                 class="error-box">
+
+                <p th:text="${error}"></p>
+
+            </div>
+
+            <form th:action="@{/loginUser}"
+                  method="post">
+
+                <div class="input-group">
+
+                    <label>Email</label>
+
+                    <input type="email"
+                           name="email"
+                           placeholder="Enter your email"
+                           required>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Password</label>
+
+                    <input type="password"
+                           name="password"
+                           placeholder="Enter your password"
+                           required>
+
+                </div>
+
+                <button type="submit"
+                        class="auth-btn">
+
+                    Login 🚀
+
+                </button>
+
+            </form>
+
+            <div class="auth-footer">
+
+                <p>
+                    Don't have an account?
+                </p>
+
+                <a href="/register">
+                    Create Account
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

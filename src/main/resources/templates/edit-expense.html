@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <title>Edit Expense</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+</head>
+
+<body class="auth-body">
+
+<div class="auth-container">
+
+    <!-- LEFT -->
+
+    <div class="auth-left">
+
+        <h1>
+            Update Expense ✏️
+        </h1>
+
+        <p>
+            Modify your transaction details
+            and manage your finances smarter.
+        </p>
+
+    </div>
+
+    <!-- RIGHT -->
+
+    <div class="auth-right">
+
+        <div class="auth-card">
+
+            <h2>
+                Edit Expense 💸
+            </h2>
+
+            <p class="auth-subtitle">
+                Update your expense details
+            </p>
+
+            <form th:action="@{/updateExpense}"
+                  th:object="${expense}"
+                  method="post">
+
+                <input type="hidden"
+                       th:field="*{id}">
+
+                <input type="hidden"
+       th:field="*{expenseDate}">
+        
+
+                <div class="input-group">
+
+                    <label>Expense Title</label>
+
+                    <input type="text"
+                           th:field="*{title}"
+                           required>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Amount</label>
+
+                    <input type="number"
+                           th:field="*{amount}"
+                           required>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>Category</label>
+
+                    <select th:field="*{category}"
+                            class="custom-select">
+
+                        <option value="Food">
+                            Food
+                        </option>
+
+                        <option value="Travel">
+                            Travel
+                        </option>
+
+                        <option value="Shopping">
+                            Shopping
+                        </option>
+
+                        <option value="Bills">
+                            Bills
+                        </option>
+
+                        <option value="Entertainment">
+                            Entertainment
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <button type="submit"
+                        class="auth-btn">
+
+                    Update Expense 🚀
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
